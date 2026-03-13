@@ -5,13 +5,13 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Install dependencies
-COPY package.json yarn.lock* package-lock.json* ./
+COPY frontend/package.json frontend/yarn.lock* package-lock.json* ./
 RUN yarn install --frozen-lockfile 2>/dev/null || npm ci 2>/dev/null || npm install
 
 COPY . .
 
 # Build (REACT_APP_* can be overridden at build or in Easypanel env)
-ARG REACT_APP_BACKEND_URL=/api
+ARG REACT_APP_BACKEND_URL=iddp.demo.agrayianailabs.com
 ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 
 RUN yarn build 2>/dev/null || npm run build
