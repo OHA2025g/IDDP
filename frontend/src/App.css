@@ -1,0 +1,437 @@
+/* Ticker - gradient edge fade + slide-in on load */
+@keyframes ticker-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ticker-wrap {
+  position: relative;
+  overflow: hidden;
+  animation: ticker-slide-in 0.5s ease-out;
+}
+
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ticker-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--surface-ticker) 0%, transparent 100%);
+}
+
+.ticker-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--surface-ticker) 0%, transparent 100%);
+}
+
+.ticker-container {
+  background-color: var(--surface-ticker);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  display: inline-flex;
+  animation: marquee 40s linear infinite;
+}
+
+.ticker-content:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.6rem;
+  font-size: 0.525rem;
+  color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ticker-item:hover {
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+/* Hero Section - animated gradient + subtle mesh */
+.hero-gradient {
+  background: linear-gradient(135deg, #a8d8e3 0%, #83c2d1 35%, #6ab0c2 70%, #5199ad 100%);
+  background-size: 200% 200%;
+  animation: hero-gradient-shift 12s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 70% 20%, rgba(255,255,255,0.25) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255,255,255,0.15) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+@keyframes hero-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Section scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* Staggered children inside reveal sections */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.reveal-visible .reveal-item { opacity: 1; transform: translateY(0); }
+.reveal.reveal-visible .reveal-item:nth-child(1) { transition-delay: 0.05s; }
+.reveal.reveal-visible .reveal-item:nth-child(2) { transition-delay: 0.1s; }
+.reveal.reveal-visible .reveal-item:nth-child(3) { transition-delay: 0.15s; }
+.reveal.reveal-visible .reveal-item:nth-child(4) { transition-delay: 0.2s; }
+.reveal.reveal-visible .reveal-item:nth-child(5) { transition-delay: 0.25s; }
+.reveal.reveal-visible .reveal-item:nth-child(6) { transition-delay: 0.3s; }
+.reveal.reveal-visible .reveal-item:nth-child(7) { transition-delay: 0.35s; }
+.reveal.reveal-visible .reveal-item:nth-child(8) { transition-delay: 0.4s; }
+.reveal.reveal-visible .reveal-item:nth-child(9) { transition-delay: 0.45s; }
+.reveal.reveal-visible .reveal-item:nth-child(10) { transition-delay: 0.5s; }
+.reveal.reveal-visible .reveal-item:nth-child(n+11) { transition-delay: 0.55s; }
+
+/* Card Hover Effects - WoW lift + glow */
+.sector-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.sector-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 40px -12px rgba(30, 58, 138, 0.18), 0 12px 20px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* Stat / module card hover */
+.card-hover-wow {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-hover-wow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(30, 58, 138, 0.12);
+}
+
+/* Score Card Accent Border */
+.score-card-primary {
+  border-left: 4px solid var(--brand-primary);
+}
+
+.score-card-success {
+  border-left: 4px solid var(--color-success);
+}
+
+.score-card-warning {
+  border-left: 4px solid var(--color-warning);
+}
+
+.score-card-danger {
+  border-left: 4px solid var(--color-danger);
+}
+
+/* Icon Container */
+.icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container.health {
+  background-color: #fce7f3;
+  color: #db2777;
+}
+
+.icon-container.education {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.icon-container.agriculture {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.icon-container.finance {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.icon-container.infrastructure {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
+
+/* Pulse Animation for Live Indicator */
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Progress Bar Styles */
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* Module Card */
+.module-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.module-card:hover {
+  background-color: #f8fafc;
+  border-color: var(--brand-primary);
+}
+
+/* Image Carousel */
+.carousel-image {
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Badge Priority Colors */
+.badge-critical {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.badge-warning {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.badge-success {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.badge-info {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+/* Watermark Pattern */
+.watermark-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e3a8a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Footer top accent line */
+footer[data-testid="footer"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+  pointer-events: none;
+}
+
+/* Composite Score Card - light blue + grid + subtle hover */
+.composite-score-card {
+  background-color: #e0f2fe;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4z' fill='%2394a3b8' fill-opacity='0.08'/%3E%3C/svg%3E");
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.composite-score-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(30, 58, 138, 0.15);
+}
+
+/* Hero entrance stagger */
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: hero-entrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-entrance-delay-0 { animation-delay: 0.1s; }
+.hero-entrance-delay-1 { animation-delay: 0.25s; }
+.hero-entrance-delay-2 { animation-delay: 0.4s; }
+.hero-entrance-delay-3 { animation-delay: 0.55s; }
+.hero-entrance-delay-4 { animation-delay: 0.7s; }
+.hero-entrance-delay-5 { animation-delay: 0.85s; }
+.hero-entrance-delay-6 { animation-delay: 1s; }
+
+@keyframes hero-entrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== WoW: Global transitions & animations ========== */
+.transition-wow {
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Nav link hover - underline slide */
+.nav-link-wow {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.nav-link-wow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-wow:hover::after {
+  width: 100%;
+}
+
+/* Button press and hover */
+.btn-wow {
+  transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.btn-wow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+}
+
+.btn-wow:active {
+  transform: translateY(0);
+}
+
+/* Logo subtle hover */
+.logo-wow {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.logo-wow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.2);
+}
+
+/* Carousel image crossfade + scale */
+.carousel-slide {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.carousel-slide.carousel-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.carousel-slide:not(.carousel-active) {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+/* Carousel dot */
+.carousel-dot {
+  transition: transform 0.25s ease, background-color 0.25s ease, width 0.25s ease;
+}
+
+.carousel-dot.carousel-dot-active {
+  transform: scale(1.25);
+  width: 8px;
+}
+
+/* Section heading reveal */
+.reveal-heading {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.reveal.reveal-visible .reveal-heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer reveal */
+.footer-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-reveal.footer-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icon hover lift in cards */
+.card-icon-wow {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-hover-wow:hover .card-icon-wow,
+.sector-card:hover .card-icon-wow {
+  transform: scale(1.08);
+}
+
+/* Explore link arrow */
+.link-arrow-wow {
+  transition: transform 0.25s ease;
+}
+
+a:hover .link-arrow-wow {
+  transform: translateX(4px);
+}
